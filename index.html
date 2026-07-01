@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Handmade Stories — Coming Soon</title>
+  <title>Handmade Stories, Coming Soon</title>
   <meta name="description" content="Handmade Stories launches 16 November 2026. Designer-curated artisan homewares, made by hand and shared in equal partnership. Join the waitlist.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,9 +85,10 @@
     /* Countdown */
     .cs-countdown{
       display:flex;
-      gap:clamp(16px,4vw,40px);
+      gap:clamp(8px,2vw,18px);
       margin-bottom:56px;
       align-items:flex-start;
+      justify-content:center;
     }
     .cs-unit{
       display:flex;
@@ -101,7 +102,7 @@
       font-weight:300;
       line-height:1;
       color:var(--cream);
-      min-width:70px;
+      min-width:56px;
       text-align:center;
     }
     .cs-label{
@@ -207,10 +208,49 @@
       line-height:1.5;
     }
 
+    /* Contact block */
+    .cs-contact{
+      margin-top:40px;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .cs-contact-line{
+      font-size:.86rem;
+      color:rgba(250,245,239,.72);
+      line-height:1.5;
+      font-weight:300;
+    }
+    .cs-contact-line strong{
+      font-weight:600;
+      color:rgba(250,245,239,.9);
+    }
+    .cs-contact-line a{
+      color:var(--sand);
+      text-decoration:none;
+      border-bottom:1px solid rgba(228,213,195,.35);
+      padding-bottom:1px;
+    }
+    .cs-contact-line a:hover{
+      border-bottom-color:var(--sand);
+    }
+
+    /* Tagline signature */
+    .cs-signature{
+      margin-top:32px;
+      font-family:var(--display);
+      font-size:1.05rem;
+      font-weight:300;
+      color:var(--sand);
+      text-align:center;
+      opacity:.85;
+    }
+
     /* Footer */
     .cs-footer{
-      margin-top:48px;
-      font-size:.74rem;
+      margin-top:24px;
+      font-size:.66rem;
       color:rgba(250,245,239,.4);
       text-align:center;
       letter-spacing:.06em;
@@ -309,6 +349,15 @@
       <h3>Welcome</h3>
       <p>Thank you for joining the waitlist.<br>We&rsquo;ll be in touch on launch day, 16 November 2026.<br>Something beautiful is coming your way.</p>
     </div>
+  </div>
+
+  <!-- Tagline -->
+  <p class="cs-signature">Honouring makers, one crafted piece at a time.</p>
+
+  <!-- Contact -->
+  <div class="cs-contact">
+    <p class="cs-contact-line"><strong>Questions?</strong> <a href="mailto:hello@handmadestories.shop">hello@handmadestories.shop</a></p>
+    <p class="cs-contact-line"><strong>Are you a maker?</strong> <a href="mailto:artisans@handmadestories.shop">artisans@handmadestories.shop</a></p>
   </div>
 
   <!-- Footer -->
