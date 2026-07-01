@@ -239,13 +239,15 @@
 
     /* Tagline signature */
     .cs-signature{
-      margin-top:32px;
+      margin-top:18px;
       font-family:var(--display);
-      font-size:1.05rem;
+      font-size:clamp(.95rem,4vw,1.2rem);
       font-weight:300;
       color:var(--sand);
       text-align:center;
       opacity:.85;
+      line-height:1.4;
+      white-space:nowrap;
     }
 
     /* Footer */
@@ -359,7 +361,7 @@
   </div>
 
   <!-- Tagline -->
-  <p class="cs-signature">Honouring makers, one crafted piece at a time.</p>
+  <p class="cs-signature">Honouring makers, one crafted piece&nbsp;at&nbsp;a&nbsp;time.</p>
 
   <!-- Contact -->
   <div class="cs-contact">
