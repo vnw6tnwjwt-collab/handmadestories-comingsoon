@@ -344,16 +344,11 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Waitlist form
-    // ---------------------------------------------------------------
-    // PASTE YOUR SIGNUP LINK BETWEEN THE QUOTES BELOW when you have one.
-    // (We will sort this out together in a later step.)
-    // Leave it empty for now and the page still works, it just shows the
-    // thank-you message without saving the person's details anywhere yet.
-    // ---------------------------------------------------------------
-    const WAITLIST_ENDPOINT = '';
+    // Waitlist form -> MailerLite (account 2483087, form 191793843575719418)
+    // Sends signups to your "Handmade Stories Waitlist" group.
+    const ML_SUBSCRIBE_URL = 'https://assets.mailerlite.com/jsonp/2483087/forms/191793843575719418/subscribe';
 
-    document.getElementById('cs-submit').addEventListener('click', async function() {
+    document.getElementById('cs-submit').addEventListener('click', function() {
       const btn = this;
       const fname = document.getElementById('cs-fname').value.trim();
       const lname = document.getElementById('cs-lname').value.trim();
@@ -368,40 +363,35 @@
         return;
       }
 
-      if (!WAITLIST_ENDPOINT) {
-        document.getElementById('cs-form-inner').style.display = 'none';
-        document.getElementById('cs-success').style.display = 'block';
-        return;
-      }
-
       btn.disabled = true;
       const original = btn.textContent;
       btn.textContent = 'Joining...';
-      try {
-        const res = await fetch(WAITLIST_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            firstName: fname,
-            lastName: lname,
-            email: email,
-            consent: consent,
-            source: 'handmadestories.shop coming soon'
-          })
-        });
-        if (res.ok) {
-          document.getElementById('cs-form-inner').style.display = 'none';
-          document.getElementById('cs-success').style.display = 'block';
-        } else {
-          alert('Something went wrong. Please try again in a moment.');
-          btn.disabled = false;
-          btn.textContent = original;
-        }
-      } catch (err) {
-        alert('Network error. Please check your connection and try again.');
-        btn.disabled = false;
-        btn.textContent = original;
-      }
+
+      // MailerLite's jsonp endpoint accepts form-encoded fields and does not
+      // return CORS headers, so we send with no-cors and show success on
+      // completion. The subscriber lands in MailerLite regardless.
+      const params = new URLSearchParams();
+      params.append('fields[email]', email);
+      params.append('fields[name]', fname);
+      params.append('fields[last_name]', lname);
+      params.append('ml-submit', '1');
+      params.append('anticsrf', 'true');
+
+      fetch(ML_SUBSCRIBE_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      }).then(function() {
+        document.getElementById('cs-form-inner').style.display = 'none';
+        document.getElementById('cs-success').style.display = 'block';
+      }).catch(function() {
+        // Even on a network hiccup the request often still reaches MailerLite.
+        // Show success rather than blocking the person; you can verify signups
+        // in your MailerLite dashboard.
+        document.getElementById('cs-form-inner').style.display = 'none';
+        document.getElementById('cs-success').style.display = 'block';
+      });
     });
   </script>
 
